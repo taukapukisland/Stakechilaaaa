@@ -46,7 +46,7 @@ export async function getOwnedERC721s(
     ]).then(([_startTokenId, _next, _total]) => {
         // default to 0 if startTokenId is not available
         const startTokenId__ =
-            _startTokenId.status === "fulfilled" ? _startTokenId.value : 0n;
+            _startTokenId.status === "fulfilled" ? _startTokenId.value : BigInt(0);
         let maxSupply_: bigint;
         // prioritize totalSupply to save on resources
         // since totalSupply should always be less than nextTokenIdToMint
@@ -66,7 +66,7 @@ export async function getOwnedERC721s(
     });
 
     const allTokenIds = Array.from(
-        { length: Number(maxSupply - startTokenId_ + 1n) },
+        { length: Number(maxSupply - startTokenId_ + BigInt(1)) },
         (_, i) => startTokenId_ + BigInt(i),
     );
 
